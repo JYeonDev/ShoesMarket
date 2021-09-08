@@ -1,0 +1,27 @@
+$main_color: #ff0000;
+
+.red {
+  color: #ff0000;
+}
+
+@mixin alert() {
+  background: #eee;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+
+.my-alert {
+  @include alert();
+}
+
+.my-alert2 {
+  @extend .my-alert;
+  background: #ffe591;
+}
+
+.my-alert p {
+  margin-bottom: 0;
+}
