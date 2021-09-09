@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import "./Detail.scss";
@@ -14,6 +14,11 @@ let Title = styled.h4`
 `;
 
 function Detail(props) {
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("ho");
+    }, 2000);
+  });
   let { id } = useParams();
   let searchItem = props.shoes.find(function (item) {
     return item.id == id;
