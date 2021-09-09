@@ -14,11 +14,17 @@ let Title = styled.h4`
 `;
 
 function Detail(props) {
+  let [alert, setAlert] = useState(true);
+  let [value, setValue] = useState("");
   useEffect(() => {
-    setTimeout(() => {
-      console.log("ho");
+    let timer = setTimeout(() => {
+      setAlert(false);
+      return () => {
+        clearTimeout(alert);
+      };
     }, 2000);
-  });
+  }, []);
+
   let { id } = useParams();
   let searchItem = props.shoes.find(function (item) {
     return item.id == id;
@@ -29,9 +35,20 @@ function Detail(props) {
       <Box>
         <Title className="red">상세페이지</Title>
       </Box>
-      <div className="my-alert2">
-        <p>재고가 얼마 남지 않았습니다</p>
-      </div>
+
+      {value}
+      <input
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+      />
+
+      {alert === true ? (
+        <div className="my-alert2">
+          <p>재고가 얼마 남지 않았습니다</p>
+        </div>
+      ) : null}
+
       <div className="row">
         <div className="col-md-6">
           <img
