@@ -66,7 +66,7 @@ function App() {
               axios
                 .get("https://codingapple1.github.io/shop/data2.json")
                 .then((result) => {
-                  console.log(result.data);
+                  setShoes([...shoes, ...result.data]);
                 })
                 .catch(() => {
                   console.log("실패");
