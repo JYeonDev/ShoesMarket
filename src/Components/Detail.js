@@ -61,7 +61,17 @@ function Detail(props) {
           <h4 className="pt-5">{searchItem.title}</h4>
           <p>{searchItem.content}</p>
           <p>{searchItem.price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+
+          <Info stock={props.stock}></Info>
+
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              props.setStock(10);
+            }}
+          >
+            주문하기
+          </button>
           <button
             className="btn btn-danger"
             onClick={() => {
@@ -74,6 +84,10 @@ function Detail(props) {
       </div>
     </div>
   );
+}
+
+function Info(props) {
+  return <p>재고 : {props.stock}</p>;
 }
 
 export default Detail;

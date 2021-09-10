@@ -11,6 +11,8 @@ import { Link, Route, Switch } from "react-router-dom";
 
 function App() {
   let [shoes, setShoes] = useState(data);
+  let [stock, setStock] = useState([10, 11, 12]);
+
   return (
     <div className="App">
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -77,7 +79,7 @@ function App() {
           </button>
         </Route>
         <Route path="/detail/:id">
-          <Detail shoes={shoes} />
+          <Detail shoes={shoes} stock={stock} setStock={setStock} />
         </Route>
 
         <Route path="/:id">
