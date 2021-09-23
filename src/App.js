@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "./App.css";
 import data from "./data";
@@ -8,6 +8,8 @@ import Detail from "./Components/Detail";
 import axios from "axios";
 
 import { Link, Route, Switch } from "react-router-dom";
+
+let stockContext = React.createContext();
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -57,11 +59,13 @@ function App() {
             <p>this is jumbotron</p>
             <button>Click me!</button>
           </div>
-          <div className="container">
-            {shoes.map((a, i) => {
-              return <Card shoes={a} i={i} key={i} />;
-            })}
-          </div>
+          <stockContext.Provider value={stock}>
+            <div className="container">
+              {shoes.map((a, i) => {
+                return <Card shoes={a} i={i} key={i} />;
+              })}
+            </div>
+          </stockContext.Provider>
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -91,6 +95,8 @@ function App() {
 }
 
 function Card(props) {
+  let stock = useContext(stockContext);
+
   return (
     <div className="col-md-4">
       <img
@@ -103,6 +109,7 @@ function Card(props) {
       <p>
         {props.shoes.content} & {props.shoes.price}
       </p>
+      {stock[props.i]}
     </div>
   );
 }
