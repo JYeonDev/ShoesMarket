@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Nav } from "react-bootstrap";
 import "./Detail.scss";
+import { CSSTransition } from "react-transition-group";
 
 let Box = styled.div`
   padding: 20px;
@@ -16,6 +18,10 @@ let Title = styled.h4`
 function Detail(props) {
   let [alert, setAlert] = useState(true);
   let [value, setValue] = useState("");
+
+  let [tab, setTab] = useState(0);
+  let [on, off] = useState(false);
+
   useEffect(() => {
     let timer = setTimeout(() => {
       setAlert(false);
@@ -36,12 +42,12 @@ function Detail(props) {
         <Title className="red">상세페이지</Title>
       </Box>
 
-      {value}
+      {/* {value}
       <input
         onChange={(e) => {
           setValue(e.target.value);
         }}
-      />
+      /> */}
 
       {alert === true ? (
         <div className="my-alert2">
@@ -82,8 +88,48 @@ function Detail(props) {
           </button>
         </div>
       </div>
+
+      <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link-0"
+            onClick={() => {
+              off(false);
+              setTab(0);
+            }}
+          >
+            Active
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link-1"
+            onClick={() => {
+              off(false);
+              setTab(1);
+            }}
+          >
+            Option 2
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+
+      <CSSTransition in={on} classNames="wow" timeout={1000}>
+        <TabContent tab={tab} off={off} />
+      </CSSTransition>
     </div>
   );
+}
+
+function TabContent(props) {
+  useEffect(() => {
+    props.off(true);
+  });
+  if (props.tab === 0) {
+    return <div>0번째 내용입니다.</div>;
+  } else if (props.tab === 1) {
+    return <div>1번째 내용입니다.</div>;
+  }
 }
 
 function Info(props) {
