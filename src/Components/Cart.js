@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { propTypes } from "react-bootstrap/esm/Image";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 let Alert = styled.div`
@@ -13,6 +13,10 @@ let Alert = styled.div`
 `;
 
 function Cart(props) {
+  let state = useSelector((state) => state);
+  console.log(state);
+  let dispatch = useDispatch();
+
   return (
     <div>
       <div>
@@ -26,7 +30,7 @@ function Cart(props) {
             </tr>
           </thead>
           <tbody>
-            {props.state.map((a, i) => {
+            {state.reducer.map((a, i) => {
               return (
                 <tr key={i}>
                   <td>{a.id}</td>
@@ -35,7 +39,7 @@ function Cart(props) {
                   <td>
                     <button
                       onClick={() => {
-                        props.dispatch({
+                        dispatch({
                           type: "수량증가",
                         });
                       }}
@@ -44,7 +48,7 @@ function Cart(props) {
                     </button>
                     <button
                       onClick={() => {
-                        props.dispatch({ type: "수량감소" });
+                        dispatch({ type: "수량감소" });
                       }}
                     >
                       -
@@ -61,7 +65,7 @@ function Cart(props) {
           <p>지금 구매하시면 신규할인 20%</p>
           <button
             onClick={() => {
-              props.dispatch({ type: "alertClose" });
+              dispatch({ type: "alertClose" });
             }}
           >
             닫기
@@ -72,7 +76,7 @@ function Cart(props) {
   );
 }
 
-function 왜안돼(state) {
+/* function 왜안돼(state) {
   console.log(state);
   return {
     state: state.reducer,
@@ -80,3 +84,6 @@ function 왜안돼(state) {
   };
 }
 export default connect(왜안돼)(Cart);
+ */
+
+export default Cart;
