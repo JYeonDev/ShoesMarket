@@ -7,7 +7,18 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
+
+let alert = true;
+
+function reducer2(state = alert, action) {
+  if (action.type === "alertClose") {
+    state = false;
+    return state;
+  } else {
+    return state;
+  }
+}
 
 let basic = [
   { id: 0, name: "멋진신발", quan: 2 },
@@ -26,10 +37,9 @@ function reducer(state = basic, action) {
   } else {
     return state;
   }
-  return state;
 }
 
-let store = createStore(reducer);
+let store = createStore(combineReducers({ reducer, reducer2 }));
 
 ReactDOM.render(
   <React.StrictMode>
