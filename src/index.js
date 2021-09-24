@@ -27,7 +27,10 @@ let basic = [
 
 function reducer(state = basic, action) {
   let copy = [...state];
-  if (action.type === "수량증가") {
+  if (action.type === "항목추가") {
+    copy.push(action.payload);
+    return copy;
+  } else if (action.type === "수량증가") {
     copy[0].quan++;
 
     return copy;
