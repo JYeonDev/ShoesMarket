@@ -8,9 +8,28 @@ import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-let store = createStore(() => {
-  return [{ id: 0, name: "멋진신발", quan: 2 }];
-});
+
+let basic = [
+  { id: 0, name: "멋진신발", quan: 2 },
+  { id: 1, name: "멋진신발2", quan: 1 },
+];
+
+function reducer(state = basic, action) {
+  let copy = [...state];
+  if (action.type === "수량증가") {
+    copy[0].quan++;
+
+    return copy;
+  } else if (action.type === "수량감소") {
+    copy[0].quan--;
+    return copy;
+  } else {
+    return state;
+  }
+  return state;
+}
+
+let store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
