@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, memo } from "react";
 import { Table } from "react-bootstrap";
 import { propTypes } from "react-bootstrap/esm/Image";
 import { connect, useDispatch, useSelector } from "react-redux";
@@ -73,6 +73,7 @@ function Cart(props) {
           </button>
         </Alert>
       ) : null}
+      <Parent 이름="존박" 나이="20"></Parent>
     </div>
   );
 }
@@ -86,5 +87,28 @@ function Cart(props) {
 }
 export default connect(왜안돼)(Cart);
  */
+
+function Parent(props) {
+  return (
+    <div>
+      <Child1 이름={props.이름}></Child1>
+      <Child2 나이={props.나이}></Child2>
+    </div>
+  );
+}
+
+function Child1(props) {
+  useEffect(() => {
+    console.log("렌더링됨1");
+  });
+  return <div>1111</div>;
+}
+
+let Child2 = memo(function (props) {
+  useEffect(() => {
+    console.log("렌더링됨2");
+  });
+  return <div>2222</div>;
+});
 
 export default Cart;
