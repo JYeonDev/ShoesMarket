@@ -28,14 +28,23 @@ let basic = [
 function reducer(state = basic, action) {
   let copy = [...state];
   if (action.type === "항목추가") {
-    copy.push(action.payload);
-    return copy;
+    let found = state.findIndex((a) => {
+      return a.id === action.payload.id;
+    });
+
+    if (found >= 0) {
+      copy[found].quan++;
+      return copy;
+    } else {
+      copy.push(action.payload);
+      return copy;
+    }
   } else if (action.type === "수량증가") {
-    copy[0].quan++;
+    copy[action.data].quan++;
 
     return copy;
   } else if (action.type === "수량감소") {
-    copy[0].quan--;
+    copy[action.data].quan--;
     return copy;
   } else {
     return state;

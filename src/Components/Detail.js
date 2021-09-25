@@ -77,7 +77,7 @@ function Detail(props) {
               props.setStock(10);
               props.dispatch({
                 type: "항목추가",
-                payload: { id: 2, name: "새로운상품", quan: 1 },
+                payload: { id: searchItem.id, name: searchItem.title, quan: 1 },
               });
               history.push("/cart");
             }}

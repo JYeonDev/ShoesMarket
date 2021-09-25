@@ -41,6 +41,7 @@ function Cart(props) {
                       onClick={() => {
                         dispatch({
                           type: "수량증가",
+                          data: a.id,
                         });
                       }}
                     >
@@ -48,7 +49,7 @@ function Cart(props) {
                     </button>
                     <button
                       onClick={() => {
-                        dispatch({ type: "수량감소" });
+                        dispatch({ type: "수량감소", data: a.id });
                       }}
                     >
                       -
